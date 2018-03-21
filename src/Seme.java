@@ -21,6 +21,18 @@ public enum Seme {
 		return valoreNumerico;
 	}
 	
+	public static Seme getSeme(int valoreNumerico) {
+		if(valoreNumerico == 1)
+			return CUORI;
+		else if(valoreNumerico == 2)
+			return PICCHE;
+		else if(valoreNumerico == 3)
+			return QUADRI;
+		else
+			return FIORI;
+		
+	}
+	
 	private Seme(int valoreNumerico) {
 		this.valoreNumerico = valoreNumerico;
 	}
