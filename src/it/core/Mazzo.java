@@ -1,5 +1,19 @@
+package it.core;
 import java.util.ArrayList;
 import java.util.Random;
+
+import it.core.carta.Carta;
+import it.core.carta.Seme;
+import it.core.carta.Stato;
+import it.core.carta.Valore;
+
+/**
+ * Questa classe rappresenta un mazzo di carte di poker
+ * @author Luca Gregori
+ * @version 1.0
+ * @see Carta
+ * @see Stato
+ */
 
 public class Mazzo {
 	private ArrayList<Carta> elencoCarte;

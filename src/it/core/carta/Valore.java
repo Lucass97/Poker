@@ -1,10 +1,9 @@
+package it.core.carta;
 /**
  * Questa classe rappresenta i possibili valori che il valore di una carta può assumere
- * 
  * @author Luca Gregori
  * @version 1.0
  * @see Valore
- * 
  */
 public enum Valore {
 	ASSO(1),
@@ -20,10 +19,7 @@ public enum Valore {
 	QUEEN(11),
 	KING(12);
 	
-	/* Variabili di istanza */
 	private int valoreNumerico;
-	
-	/* Metodi */
 	
 	public int getValoreNumerico() {
 		return valoreNumerico;

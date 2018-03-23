@@ -1,10 +1,10 @@
+package it.core.carta;
+
 /**
  * Questa classe rappresenta i possibili valori che il seme di una carta può assumere
- * 
  * @author Luca Gregori
  * @version 1.0
  * @see Valore
- * 
  */
 public enum Seme {
 	CUORI(1),
@@ -12,10 +12,7 @@ public enum Seme {
 	QUADRI(3),
 	FIORI(4);
 	
-	/* Variabili di istanza */
 	private int valoreNumerico;
-	
-	/* Metodi */
 	
 	public int getValoreNumerico() {
 		return valoreNumerico;

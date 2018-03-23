@@ -1,3 +1,8 @@
+package it;
+
+import it.core.Mazzo;
+import it.core.carta.Carta;
+import it.core.carta.Stato;
 
 public class Poker {
 
