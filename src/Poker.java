@@ -5,8 +5,10 @@ public class Poker {
 		Mazzo mazzo = new Mazzo();
 		//mazzo.stampaMazzo();
 		Carta carta = mazzo.pescaCartaCasuale(Stato.GIOCATORE);
-		carta.stampaCarta();
-		System.out.println(Stato.GIOCATORE.equals(Stato.GIOCATORE));
+		mazzo.mischiaMazzo(100);
+		mazzo.stampaMazzo();
+		//carta.stampaCarta();
+		//System.out.println(!carta.getStato().equals(Stato.GIOCATORE));
 	}
 
 }

@@ -15,6 +15,14 @@ public class Carta {
 	public void stampaCarta() {
 		System.out.println(seme.toString() + " " + valore.toString() + " " + stato.toString());
 	}
+	
+	public boolean equals(Carta carta) {
+		if(this.seme != carta.seme)
+			return false;
+		if(this.valore != carta.valore)
+			return false;
+		return true;
+	}
 	public Carta (Seme seme, Valore valore, Stato stato) {
 		this.seme = seme;
 		this.valore = valore;
