@@ -10,4 +10,5 @@ public enum Stato {
 	MAZZO,
 	GIOCATORE,
 	TAVOLO,
+	NON_USATA
 }

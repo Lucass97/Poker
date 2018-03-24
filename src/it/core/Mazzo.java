@@ -14,19 +14,24 @@ import it.core.carta.Valore;
  * @see Carta
  * @see Stato
  */
-
 public class Mazzo {
 	private ArrayList<Carta> elencoCarte;
 	
 	public void stampaMazzo() {
-		for(int i=0; i<elencoCarte.size(); i++) {
-			elencoCarte.get(i).stampaCarta();
+		for(Carta carta : elencoCarte)
+			carta.stampaCarta();
+	}
+	
+	public void stampaMazzo(Stato stato) {
+		for(Carta carta : elencoCarte) {
+			if(carta.getStato().equals(stato))
+				carta.stampaCarta();
 		}
 	}
 	
 	/**
 	 * Questo metodo permette di pescare una carta casuale dal mazzo.
-	 * Le carte pescate hanno stato uguale a "mazzo".
+	 * Sarà pescata una carta con stato pari a "MAZZO".
 	 * @param stato - sarà il nuovo stato della carta appena pescata
 	 * @return riferimento ad una carta casuale del mazzo
 	 * @see Stato
@@ -44,6 +49,18 @@ public class Mazzo {
 		carta.stampaCarta();
 		return carta;
 	}
+	
+	/**
+	 * Questo metodo permette di pescare una carta casuale dal mazzo.
+	 * Sarà pescata una carta con stato pari a "MAZZO".
+	 * La carta sarà aggiorna con un nuovo stato pari a "GIOCATORE"
+	 * @return riferimento ad una carta casuale del mazzo
+	 * @see Stato
+	 */
+	public Carta pescaCartaCasuale() {
+		return pescaCartaCasuale(Stato.GIOCATORE);
+	}
+	
 	/**
 	 * Questo metodo permette di mischiare un mazzo.
 	 * @param fattore - indica il numero di passaggi effettuati per mischiare il mazzo.
@@ -63,14 +80,63 @@ public class Mazzo {
 				carta2 = this.pescaCartaCasuale(Stato.MAZZO); 
 			int index1 = elencoCarte.indexOf(carta1);
 			int index2 = elencoCarte.indexOf(carta2);
-			//Swap indici
-			System.out.print("\tSwap tra \n\t");
-			carta1.stampaCarta();
-			System.out.print("\t");
-			carta2.stampaCarta();
 			elencoCarte.set(index1, carta2);
 			elencoCarte.set(index2, carta1);
 		}
+	}
+	
+	/**
+	 * Questo metodo permette di decidere quali carte potranno essere giocate.
+	 * Le carte NON giocate avranno stato pari a "NON_USATA" il resto avrà stato pari a "MAZZO"
+	 * @param numeroGiocatori - influenzerà il numero di carte giocabili.
+	 */
+	public void setCarteGiocabili(int numeroGiocatori) throws Exception{
+		if(numeroGiocatori < 2 || numeroGiocatori > 10)
+			throw new Exception();
+		int valorePiuBasso = 11 - numeroGiocatori;
+		for(Carta carta : elencoCarte) {
+			if(carta.getValore().getValoreNumerico() < valorePiuBasso)
+				carta.setStato(Stato.NON_USATA);
+			else if(carta.getValore().equals(Valore.ASSO))
+				carta.setStato(Stato.MAZZO);
+			else
+				carta.setStato(Stato.MAZZO);
+		}
+	}
+	
+	/**
+	 * Questo metodo conta le carte giocabili presenti nel mazzo
+	 * @return il numero di carte che non hanno stato pari a "NON_USATA"
+	 */
+	public int contaCarteGiocabili(){
+		int conta = 0;
+		for(Carta carta : elencoCarte) {
+			if(!carta.getStato().equals(Stato.NON_USATA))
+				conta++;
+			}
+		return conta;
+	}
+	
+	/**
+	 * Questo metodo conta le carte presenti nel mazzo
+	 * @param stato - indica lo stato delle carte da contare
+	 * @return il numero di carte che hanno stato pari a quello scelto come parametro
+	 */
+	public int contaCarte(Stato stato){
+		int conta = 0;
+		for(Carta carta : elencoCarte) {
+			if(carta.getStato().equals(stato))
+				conta++;
+			}
+		return conta;
+	}
+	
+	/**
+	 * Questo metodo conta le carte con stato pari a "MAZZO" presenti nel mazzo
+	 * @return il numero di carte con stato pari a "MAZZO"
+	 */
+	public int contaCarte(){
+		return contaCarte(Stato.MAZZO);
 	}
 	
 	//costruttori

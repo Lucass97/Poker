@@ -1,7 +1,5 @@
 package it.core.carta;
 
-import javax.jws.Oneway;
-
 /**
  * Questa classe rappresenta una carta da gioco per il poker
  * @author Luca Gregori
@@ -28,6 +26,10 @@ public class Carta {
 	 * Questo metodo restituisce lo stato della carta
 	 * @return stato della carta
 	 */
+	public Valore getValore() {
+		return this.valore;
+	}
+	
 	public Stato getStato() {
 		return this.stato;
 	}
