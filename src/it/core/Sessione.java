@@ -1,6 +1,18 @@
 package it.core;
 import java.util.ArrayList;
 
+import it.core.carta.Seme;
+import it.core.carta.Stato;
+import it.core.carta.Valore;
+
+/**
+ * Questa classe rappresenta una sessione di gioco (poker)
+ * @author Luca Gregori
+ * @version 1.0
+ * @see Giocatore
+ * @see Mazzo
+ * @see Carta
+ */
 public class Sessione {
 	
 	private ArrayList<Giocatore> elencoGiocatori;
@@ -28,6 +40,6 @@ public class Sessione {
 	
 	public Sessione() {
 		this.elencoGiocatori = new ArrayList<Giocatore>();
-		mazzo = new Mazzo();
+		this.mazzo = new Mazzo();
 	}
 }
