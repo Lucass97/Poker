@@ -1,11 +1,12 @@
-package it.core;
+package it.poker;
+import java.awt.PointerInfo;
 import java.util.ArrayList;
 import java.util.Random;
 
-import it.core.carta.Carta;
-import it.core.carta.Seme;
-import it.core.carta.Stato;
-import it.core.carta.Valore;
+import it.poker.carta.Carta;
+import it.poker.carta.Seme;
+import it.poker.carta.Stato;
+import it.poker.carta.Valore;
 
 /**
  * Questa classe rappresenta un mazzo di carte di poker
@@ -36,17 +37,19 @@ public class Mazzo {
 	 * @return riferimento ad una carta casuale del mazzo
 	 * @see Stato
 	 */
-	public Carta pescaCartaCasuale(Stato stato) {
+	public Carta pescaCartaCasuale(Stato stato) throws NullPointerException{
 		Random r = new Random();
-		Carta carta;
+		Carta carta = null;
 		do {
 			int index = r.nextInt(elencoCarte.size());
 			carta = elencoCarte.get(index);
+			if(carta == null)
+				throw new NullPointerException();
 		} while(!carta.getStato().equals(Stato.MAZZO));
 		
-		carta.setStato(stato);
 		System.out.print("ho pescato: ");
 		carta.stampaCarta();
+		carta.setStato(stato);
 		return carta;
 	}
 	
@@ -139,7 +142,9 @@ public class Mazzo {
 		return contaCarte(Stato.MAZZO);
 	}
 	
-	//costruttori
+	/**
+	 * Costruttore
+	 */
 	public Mazzo() {
 		elencoCarte = new ArrayList<Carta>();
 		for(int i=0; i<4; i++) {

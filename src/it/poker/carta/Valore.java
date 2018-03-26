@@ -1,4 +1,4 @@
-package it.core.carta;
+package it.poker.carta;
 /**
  * Questa classe rappresenta i possibili valori che il valore di una carta può assumere
  * @author Luca Gregori

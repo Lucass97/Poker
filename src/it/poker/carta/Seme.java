@@ -1,4 +1,4 @@
-package it.core.carta;
+package it.poker.carta;
 
 /**
  * Questa classe rappresenta i possibili valori che il seme di una carta può assumere

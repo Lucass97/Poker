@@ -1,4 +1,4 @@
-package it.core.carta;
+package it.poker.carta;
 
 /**
  * Questa classe rappresenta una carta da gioco per il poker

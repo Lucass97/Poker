@@ -1,4 +1,4 @@
-package it.core;
+package it.poker;
 
 public class SessioneException extends Exception{
 	

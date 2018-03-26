@@ -1,9 +1,9 @@
-package it.core;
+package it.poker;
 import java.util.ArrayList;
 
-import it.core.carta.Seme;
-import it.core.carta.Stato;
-import it.core.carta.Valore;
+import it.poker.carta.Seme;
+import it.poker.carta.Stato;
+import it.poker.carta.Valore;
 
 /**
  * Questa classe rappresenta una sessione di gioco (poker)
@@ -25,9 +25,25 @@ public class Sessione {
 		elencoGiocatori.add(player);
 	}
 	
+	private void distribuisciCarte() {
+		for(Giocatore player: elencoGiocatori) {
+			for(int i=0; i<5; i++) {
+				player.addCarta(mazzo.pescaCartaCasuale(Stato.GIOCATORE));
+			}
+		}
+	}
 	public void start() throws Exception {
 		if(elencoGiocatori.size() < 2)
 			throw new Exception("Errore! non ci sono abbastanza giocatori!");
+		distribuisciCarte();
+	}
+	
+	public Giocatore getPlayer(String nome) {
+		for(Giocatore player: elencoGiocatori) {
+			if(player.getNome().equals(nome))
+				return player;
+		}
+		return null;
 	}
 	
 	/*public void setElencoGiocatori (ArrayList<Giocatore> elencoGiocatori) throws Exception{
