@@ -8,12 +8,23 @@ public class Giocatore{
 	
 	private String nome;
 	private ArrayList <Carta> elencoCarte;
+	private int dispCambioCarte;
 	
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public void resetDispCambioCarte() {
+		this.dispCambioCarte = 4;
+	}
+	public void reduceDispCambioCarte(){
+		if(this.dispCambioCarte > 0)
+			this.dispCambioCarte--;
+	}
+	public int getDispCambioCarte() {
+		return this.dispCambioCarte;
 	}
 	
 	public Carta getCarta(Carta cartaDaTrovare, Stato stato) {
@@ -31,6 +42,9 @@ public class Giocatore{
 		carta.setStato(stato);
 		return carta;
 	}
+	public void removeCartaByIndex(int index) {
+		elencoCarte.remove(index);
+	}
 	
 	public ArrayList<Carta> getCarte() {
 		return elencoCarte;
@@ -43,8 +57,13 @@ public class Giocatore{
 		this.elencoCarte.add(carta);
 	}
 	
+	public void addCarta(Carta carta,int index) {
+		this.elencoCarte.add(index,carta);
+	}
+	
 	public Giocatore(String nome) {
 		this.setNome(nome);
 		this.elencoCarte = new ArrayList<Carta>();
+		this.dispCambioCarte = 4;
 	}
 }

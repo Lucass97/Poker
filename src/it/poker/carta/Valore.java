@@ -1,4 +1,5 @@
 package it.poker.carta;
+
 /**
  * Questa classe rappresenta i possibili valori che il valore di una carta può assumere
  * @author Luca Gregori
@@ -15,16 +16,26 @@ public enum Valore {
 	SETTE(7),
 	OTTO(8),
 	NOVE(9),
-	JACK(10),
-	QUEEN(11),
-	KING(12);
+	DIECI(10),
+	JACK(11),
+	QUEEN(12),
+	KING(13);
 	
 	private int valoreNumerico;
 	
+	/**
+	 * Questo metodo restituisce il corrispondente valore numerico del valore corrente
+	 * @return valore numerico corrispondente al valore corrente
+	 */
 	public int getValoreNumerico() {
 		return valoreNumerico;
 	}
 	
+	/**
+	 * Questo metodo dato un valore numerico restituirà il valore corrispondente
+	 * @param valoreNumerico - range di valori possibili: [1-12]; qualsiasi valore diverso verrà considerato come 1
+	 * @return valore corrispondete a "valoreNumerico"
+	 */
 	public static Valore getValore(int valoreNumerico) {
 		switch(valoreNumerico) {
 			case 1: return ASSO;
@@ -36,9 +47,10 @@ public enum Valore {
 			case 7: return SETTE;
 			case 8: return OTTO;
 			case 9: return NOVE;
-			case 10: return JACK;
-			case 11: return QUEEN;
-			case 12: return KING;
+			case 10: return DIECI;
+			case 11: return JACK;
+			case 12: return QUEEN;
+			case 13: return KING;
 			default : return ASSO;
 		}
 		

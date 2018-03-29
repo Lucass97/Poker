@@ -14,10 +14,19 @@ public enum Seme {
 	
 	private int valoreNumerico;
 	
+	/**
+	 * Questo metodo restituisce il corrispondente valore numerico del seme corrente
+	 * @return valore numerico corrispondente al seme corrente
+	 */
 	public int getValoreNumerico() {
 		return valoreNumerico;
 	}
 	
+	/**
+	 * Questo metodo dato un valore numerico restituirà il seme corrispondente
+	 * @param valoreNumerico - range di valori possibili: [1-4]; qualsiasi valore diverso verrà considerato come 4
+	 * @return seme corrispondete a "valoreNumerico"
+	 */
 	public static Seme getSeme(int valoreNumerico) {
 		if(valoreNumerico == 1)
 			return CUORI;

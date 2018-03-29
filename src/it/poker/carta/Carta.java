@@ -15,7 +15,7 @@ public class Carta {
 	private Stato stato;
 	
 	/**
-	 * Questo metodo cambia lo stato della carta
+	 * Questo metodo permette di cambiare lo stato della carta
 	 * @param stato - nuovo stato della carta
 	 */
 	public void setStato(Stato stato) {
@@ -23,13 +23,17 @@ public class Carta {
 	}
 	
 	/**
-	 * Questo metodo restituisce lo stato della carta
-	 * @return stato della carta
+	 * Questo metodo restituisce il valore della carta
+	 * @return valore della carta
 	 */
 	public Valore getValore() {
 		return this.valore;
 	}
 	
+	/**
+	 * Questo metodo restituisce lo stato della carta
+	 * @return stato della carta
+	 */
 	public Stato getStato() {
 		return this.stato;
 	}
@@ -41,6 +45,10 @@ public class Carta {
 		System.out.println(this.toString());
 	}
 	
+	/**
+	 * Questo metodo trasforma in stringa la carta
+	 * @return stringa che rappresenta la carta
+	 */
 	@Override
 	public String toString() {
 		return seme.toString() + " " + valore.toString() + " " + stato.toString();
@@ -62,6 +70,12 @@ public class Carta {
 		return true;
 	}
 	
+	/**
+	 * Costruttore che permette di creare una carta, specificando seme, valore e stato
+	 * @param seme
+	 * @param valore
+	 * @param stato
+	 */
 	public Carta (Seme seme, Valore valore, Stato stato) {
 		this.seme = seme;
 		this.valore = valore;

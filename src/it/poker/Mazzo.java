@@ -16,13 +16,25 @@ import it.poker.carta.Valore;
  * @see Stato
  */
 public class Mazzo {
-	private ArrayList<Carta> elencoCarte;
 	
+	private ArrayList<Carta> elencoCarte;
+	private int carteGiocabili;
+	private int carteNelMazzo;
+	
+	/**
+	 * Questo metodo permette di stampare tutte le carte del mazzo
+	 * @see Stato
+	 */
 	public void stampaMazzo() {
 		for(Carta carta : elencoCarte)
 			carta.stampaCarta();
 	}
 	
+	/**
+	 * Questo metodo permette di stampare le carte del mazzo con un determinato stato
+	 * @param stato - indica il parametro di ricera all'interno del mazzo
+	 * @see Stato
+	 */
 	public void stampaMazzo(Stato stato) {
 		for(Carta carta : elencoCarte) {
 			if(carta.getStato().equals(stato))
@@ -38,18 +50,20 @@ public class Mazzo {
 	 * @see Stato
 	 */
 	public Carta pescaCartaCasuale(Stato stato) throws NullPointerException{
+		if(this.carteNelMazzo == 0)
+			throw new NullPointerException("Non esistono carte nel mazzo! Impossibile pescare!");
 		Random r = new Random();
 		Carta carta = null;
 		do {
 			int index = r.nextInt(elencoCarte.size());
 			carta = elencoCarte.get(index);
-			if(carta == null)
-				throw new NullPointerException();
 		} while(!carta.getStato().equals(Stato.MAZZO));
 		
 		System.out.print("ho pescato: ");
 		carta.stampaCarta();
 		carta.setStato(stato);
+		if(!stato.equals(Stato.MAZZO))
+			this.carteNelMazzo--;
 		return carta;
 	}
 	
@@ -60,7 +74,7 @@ public class Mazzo {
 	 * @return riferimento ad una carta casuale del mazzo
 	 * @see Stato
 	 */
-	public Carta pescaCartaCasuale() {
+	public Carta pescaCartaCasuale() throws Exception{
 		return pescaCartaCasuale(Stato.GIOCATORE);
 	}
 	
@@ -71,21 +85,27 @@ public class Mazzo {
 	 * @return void
 	 * @see {@link #pescaCartaCasuale(Stato) pescaCartaCasuale(Stato stato)}
 	 */
-	public void mischiaMazzo(int fattore) {
-		if(fattore > 1000)
-			fattore = 1000;
-		else if(fattore <= 10)
-			fattore = 10;
-		for(int i=0; i<fattore; i++) {
-			Carta carta1 = this.pescaCartaCasuale(Stato.MAZZO);
-			Carta carta2 = this.pescaCartaCasuale(Stato.MAZZO);
-			while(carta1.equals(carta2))
-				carta2 = this.pescaCartaCasuale(Stato.MAZZO); 
-			int index1 = elencoCarte.indexOf(carta1);
-			int index2 = elencoCarte.indexOf(carta2);
-			elencoCarte.set(index1, carta2);
-			elencoCarte.set(index2, carta1);
-		}
+	public void mischiaMazzo(int fattore){
+		if(this.carteNelMazzo == 0)
+			return;
+		try {
+			if(fattore > 1000)
+				fattore = 1000;
+			else if(fattore <= 10)
+				fattore = 10;
+			for(int i=0; i<fattore; i++) {
+				Carta carta1 = this.pescaCartaCasuale(Stato.MAZZO);
+				Carta carta2 = this.pescaCartaCasuale(Stato.MAZZO);
+				while(carta1.equals(carta2))
+					carta2 = this.pescaCartaCasuale(Stato.MAZZO); 
+				int index1 = elencoCarte.indexOf(carta1);
+				int index2 = elencoCarte.indexOf(carta2);
+				elencoCarte.set(index1, carta2);
+				elencoCarte.set(index2, carta1);
+			}
+		}catch(Exception e) {
+
+		};
 	}
 	
 	/**
@@ -96,15 +116,19 @@ public class Mazzo {
 	public void setCarteGiocabili(int numeroGiocatori) throws Exception{
 		if(numeroGiocatori < 2 || numeroGiocatori > 10)
 			throw new Exception();
+		
+		this.carteGiocabili = 52;
 		int valorePiuBasso = 11 - numeroGiocatori;
 		for(Carta carta : elencoCarte) {
-			if(carta.getValore().getValoreNumerico() < valorePiuBasso)
-				carta.setStato(Stato.NON_USATA);
-			else if(carta.getValore().equals(Valore.ASSO))
-				carta.setStato(Stato.MAZZO);
-			else
-				carta.setStato(Stato.MAZZO);
+			if(carta.getValore().getValoreNumerico() < valorePiuBasso) 
+				if (!carta.getValore().equals(Valore.ASSO)){
+					carta.setStato(Stato.NON_USATA);
+					this.carteGiocabili--; // non conto quelle non usate
+				}
+				else
+					carta.setStato(Stato.MAZZO);
 		}
+		this.carteNelMazzo = this.carteGiocabili;
 	}
 	
 	/**
@@ -112,12 +136,13 @@ public class Mazzo {
 	 * @return il numero di carte che non hanno stato pari a "NON_USATA"
 	 */
 	public int contaCarteGiocabili(){
-		int conta = 0;
+		/*int conta = 0;
 		for(Carta carta : elencoCarte) {
 			if(!carta.getStato().equals(Stato.NON_USATA))
 				conta++;
 			}
-		return conta;
+		return conta;*/
+		return this.carteGiocabili;
 	}
 	
 	/**
@@ -139,16 +164,19 @@ public class Mazzo {
 	 * @return il numero di carte con stato pari a "MAZZO"
 	 */
 	public int contaCarte(){
-		return contaCarte(Stato.MAZZO);
+		//return contaCarte(Stato.MAZZO);
+		return this.carteNelMazzo;
 	}
 	
 	/**
-	 * Costruttore
+	 * Costruttore che crea un mazzo
 	 */
 	public Mazzo() {
-		elencoCarte = new ArrayList<Carta>();
-		for(int i=0; i<4; i++) {
-			for(int j=0; j<13; j++) {
+		this.elencoCarte = new ArrayList<Carta>();
+		this.carteGiocabili = 52; // per default tutte le carte sono giocabili
+		this.carteNelMazzo = 52; // per default tutte le carte hanno stato "mazzo"
+		for(int i=1; i<=4; i++) {
+			for(int j=1; j<=13; j++) {
 				Carta carta = new Carta(Seme.getSeme(i), Valore.getValore(j), Stato.MAZZO);
 				elencoCarte.add(carta);
 			}

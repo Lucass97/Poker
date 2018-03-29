@@ -12,24 +12,59 @@ import it.poker.carta.Stato;
 public class Poker {
 
 	public static void main(String[] args) {
-		//Mazzo mazzo = new Mazzo();
-		//mazzo.stampaMazzo();
+		Mazzo mazzo = new Mazzo();
+		mazzo.stampaMazzo();
 		//mazzo.mischiaMazzo(100);
-		/*System.out.println(mazzo.contaCarteGiocabili());
+		System.out.println("Numero carte giocabili: " + mazzo.contaCarteGiocabili());
+		System.out.println("Numero carte nel mazzo: " + mazzo.contaCarte());
 		try {
-			mazzo.setCarteGiocabili(5);
+			mazzo.setCarteGiocabili(2);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
-		/*Carta carta = mazzo.pescaCartaCasuale(Stato.GIOCATORE);
-		Giocatore player = new Giocatore("Culo");
-		player.addCarta(carta);
-		player.addCarta(mazzo.pescaCartaCasuale(Stato.GIOCATORE));
-		player.addCarta(mazzo.pescaCartaCasuale(Stato.GIOCATORE));*/
+		System.out.println("Numero carte giocabili: " + mazzo.contaCarteGiocabili());
+		System.out.println("Numero carte nel mazzo: " + mazzo.contaCarte());
 		
-		Sessione partita = new Sessione();
+		try {
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+		    mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+		    mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+			mazzo.pescaCartaCasuale(Stato.GIOCATORE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getCause());
+			e.printStackTrace();
+		}
+		
+		//mazzo.stampaMazzo();
+		
+		System.out.println("Numero carte giocabili: " + mazzo.contaCarteGiocabili());
+		System.out.println("Numero carte nel mazzo: " + mazzo.contaCarte());
+		
+		/*Sessione partita = new Sessione();
 		try {
 			partita.aggiungiGiocatore("Silviu");
 			partita.aggiungiGiocatore("Ienna");
@@ -53,7 +88,7 @@ public class Poker {
 		System.out.println("Carte di ienna negro ");
 		for(int i=0; i<5; i++) {
 			partita.getPlayer("Ienna").getCarte().get(i).stampaCarta();
-		}
+		}*/
 		
 		
 		//mazzo.stampaMazzo();
