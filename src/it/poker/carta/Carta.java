@@ -56,8 +56,8 @@ public class Carta {
 	
 	/**
 	 * Questo metodo confronta due carte.
-	 * Due carte sono uguali se hanno lo stesso seme e lo stesso valore
-	 * @param carta - seconda carta da confrontare con questa
+	 * Due carte sono uguali se hanno lo stesso seme e lo stesso valore.
+	 * @param o - secondo oggetto (Carta) da confrontare.
 	 * @return true se le carte sono uguali, false altrimenti
 	 */
 	@Override

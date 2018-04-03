@@ -18,19 +18,42 @@ public class Sessione {
 	
 	private ArrayList<Giocatore> elencoGiocatori;
 	private Mazzo mazzo;
+	private boolean start;
 	
-	public void aggiungiGiocatore(String nome) throws Exception{
+	/**
+	 * Questo metodo restituirà lo stato della partita.
+	 * @return true se la partita è cominciata, false altrimenti.
+	 */
+	public boolean isStart() {
+		return this.start;
+	}
+	
+	/**
+	 * Questo metodo aggiunge un nuovo giocatore alla lista di giocatori della sessione.
+	 * @param nome - indica il nome del nuovo giocatore.
+	 * @return true se è stato aggiunto corretamente il giocatore, false altrimenti
+	 * viene lanciata un eccezzione.
+	 */
+	public boolean aggiungiGiocatore(String nome){
 		if(elencoGiocatori.size() == 10)
-			throw new Exception("Errore numero massimo giocatori raggiunti");
+			return false;
 		Giocatore player = new Giocatore(nome);
-		elencoGiocatori.add(player);
+		for(Giocatore giocatore : elencoGiocatori) {
+			if(giocatore.equals(player)) {
+				return false;
+			}
+		}
+		return elencoGiocatori.add(player);
 	}
 	
 	/**
 	 * Questo metodo distribuisce le carte fra tutti i giocatori.
 	 * Saranno pescate casualmente 5 carte per giocatore.
+	 * @throws Exception - se non ci sono almeno due giocatori, viene lanciata un eccezzione.
 	 */
-	private void distribuisciCarte() {
+	private void distribuisciCarte() throws Exception{
+		if(elencoGiocatori.size() < 2)
+			throw new Exception();
 		for(Giocatore player: elencoGiocatori) {
 			for(int i=0; i<5; i++) {
 				player.addCarta(mazzo.pescaCartaCasuale(Stato.GIOCATORE));
@@ -46,15 +69,23 @@ public class Sessione {
 	public void start() throws Exception {
 		if(elencoGiocatori.size() < 2)
 			throw new Exception("Errore! non ci sono abbastanza giocatori!");
+		this.start = true;
 		distribuisciCarte();
 	}
 	
-	public Giocatore getPlayer(String nome) {
+	/**
+	 * Questo metodo cerca il giocatore all'interno dell'elenco giocatori della sessione.
+	 * @param nome - che verrà usato come parametro di ricerca
+	 * @return il giocatore desiderato, null se non viene trovato.
+	 */
+	public Giocatore getPlayer(String nome) throws NullPointerException{
+		if(elencoGiocatori.size() == 0 )
+			throw new NullPointerException();
 		for(Giocatore player: elencoGiocatori) {
 			if(player.getNome().equals(nome))
 				return player;
 		}
-		return null;
+		throw new NullPointerException();
 	}
 
 	public void cambioCarteGiocatore(Giocatore player, int indexCarta){
@@ -67,7 +98,12 @@ public class Sessione {
 		}
 	}
 	
+	public void stampaCarteGiocatore(int indexGiocatore) {
+		elencoGiocatori.get(indexGiocatore).stampa();
+	}
+	
 	public Sessione() {
+		this.start = false;
 		this.elencoGiocatori = new ArrayList<Giocatore>();
 		this.mazzo = new Mazzo();
 	}
