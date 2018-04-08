@@ -1,6 +1,7 @@
 package it.poker;
 import java.awt.PointerInfo;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import it.poker.carta.Carta;
@@ -49,9 +50,9 @@ public class Mazzo {
 	 * @return riferimento ad una carta casuale del mazzo
 	 * @see Stato
 	 */
-	public Carta pescaCartaCasuale(Stato stato) throws NullPointerException{
+	public Carta pescaCartaCasuale(Stato stato) throws NoSuchElementException{
 		if(this.carteNelMazzo == 0)
-			throw new NullPointerException("Non esistono carte nel mazzo! Impossibile pescare!");
+			throw new NoSuchElementException("Non esistono carte nel mazzo! Impossibile pescare!");
 		Random r = new Random();
 		Carta carta = null;
 		do {
@@ -85,9 +86,9 @@ public class Mazzo {
 	 * @return void
 	 * @see {@link #pescaCartaCasuale(Stato) pescaCartaCasuale(Stato stato)}
 	 */
-	public void mischiaMazzo(int fattore){
+	public boolean mischiaMazzo(int fattore){
 		if(this.carteNelMazzo == 0)
-			return;
+			return false;
 		try {
 			if(fattore > 1000)
 				fattore = 1000;
@@ -104,8 +105,9 @@ public class Mazzo {
 				elencoCarte.set(index2, carta1);
 			}
 		}catch(Exception e) {
-
+			return false;
 		};
+		return true;
 	}
 	
 	/**
@@ -169,7 +171,7 @@ public class Mazzo {
 	}
 	
 	/**
-	 * Costruttore che crea un mazzo
+	 * Costruttore che crea un mazzo di 52 carte.
 	 */
 	public Mazzo() {
 		this.elencoCarte = new ArrayList<Carta>();
