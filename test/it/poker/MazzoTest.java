@@ -131,19 +131,15 @@ public class MazzoTest {
 	}
 
 	@Test
-	public void testContaCarteStato() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testContaCarte() {
 		assertEquals(52, this.mazzo6.contaCarte());
 		assertEquals(52,this.mazzo6.contaCarte(Stato.MAZZO));
-	}
-
-	@Test
-	public void testMazzo() {
-		fail("Not yet implemented");
+		assertEquals(0,this.mazzo6.contaCarte(Stato.GIOCATORE));
+		for(int i=0; i<10; i++) {
+			this.mazzo6.pescaCartaCasuale(Stato.TAVOLO);
+		}
+		assertEquals(10, this.mazzo6.contaCarte(Stato.TAVOLO));
+		assertEquals(42, this.mazzo6.contaCarte(Stato.MAZZO));
 	}
 
 }
